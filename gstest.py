@@ -25,3 +25,5 @@ def read_responses(sht):
 
     return out
 
+def auto_read_responses():
+    return read_responses(wks)
