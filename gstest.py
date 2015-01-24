@@ -7,6 +7,8 @@ gc = gspread.login(username, onetimepass)
 
 wks = gc.open("evaluation_NYT_2014_01 (Responses)").sheet1
 
+fields = ['timestamp', 'quantitative rating', 'qualitative rating', 'keywords / tags', 'optional keywords', 'endorsement', 'username']
+
 # read every populated row in the spread sheet
 def read_responses(sht):
     row = 2
@@ -27,3 +29,19 @@ def read_responses(sht):
 
 def auto_read_responses():
     return read_responses(wks)
+
+def transpose(m):
+    keys = m[0].keys()
+    mt = {}
+    for key in keys:
+        mt[key] = []
+
+    for row in m:
+        for key in keys:
+            mt[key].append(row[key])
+
+    return mt
+
+
+
+
